@@ -46,7 +46,7 @@ with col2:
         f"[Open ODI questionnaire PDF]({ODI_URL})  \n"
         "Please complete the questionnaire and enter the final ODI score (0–50) below."
     )
-    odi = st.number_input("ODI Score (0–100)", min_value=0.0, max_value=100.0, value=10.0, step=0.1)
+    odi = st.number_input("ODI Score (0–50)", min_value=0.0, max_value=100.0, value=10.0, step=0.1)
 
     st.markdown("**VAS (Visual Analogue Scale)**")
     vas = st.slider("Low back pain intensity (0 = none, 10 = worst imaginable)", 0.0, 10.0, 2.0, 0.1)
