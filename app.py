@@ -46,7 +46,7 @@ with col2:
         f"[Open ODI questionnaire PDF]({ODI_URL})  \n"
         "Please complete the questionnaire and enter the final ODI score (0–50) below."
     )
-    odi = st.number_input("ODI Score (0–50)", min_value=0.0, max_value=100.0, value=10.0, step=0.1)
+    odi = st.number_input("ODI Score (0–100)", min_value=0.0, max_value=100.0, value=10.0, step=0.1)
 
     st.markdown("**VAS (Visual Analogue Scale)**")
     vas = st.slider("Low back pain intensity (0 = none, 10 = worst imaginable)", 0.0, 10.0, 2.0, 0.1)
@@ -124,11 +124,11 @@ if st.button("Predict"):
 
     # --- Input validation ---
     required_fields = {
-        "Postural Stability Velocity": ps_velocity,
-        "Postural Stability Sway Area": ps_sway_area,
-        "Postural Stability Sway_Path": ps_sway_path,
-        "Walking Velocity": w_velocity,
-        "Walking Duration": w_duration
+        "Postural Stability Velocity (cm/s)": ps_velocity,
+        "Postural Stability Sway Area (cm²)": ps_sway_area,
+        "Postural Stability Sway_Path (cm)": ps_sway_path,
+        "Walking Velocity (m/s)": w_velocity,
+        "Walking Duration (sec)": w_duration
     }
 
     missing = [name for name, val in required_fields.items() if val == 0]
@@ -145,7 +145,7 @@ if st.button("Predict"):
     proba_fall = float(model.predict_proba(X_input)[0, 1])
     pred = 1 if proba_fall >= 0.50 else 0
 
-    st.write(f"**Probability of Faller (Class 1):** `{proba_fall:.3f}`")
+    st.write(f"**Probability of Faller (%):** `{proba_fall:.3f}`")
     st.write(f"**Predicted Fall Status:** `{pred}`")
 
     if pred == 1:
