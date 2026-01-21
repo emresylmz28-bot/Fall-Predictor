@@ -46,7 +46,7 @@ with col2:
         f"[Open ODI questionnaire PDF]({ODI_URL})  \n"
         "Please complete the questionnaire and enter the final ODI score (0–50) below."
     )
-    odi = st.number_input("ODI Score (0–100)", min_value=0.0, max_value=100.0, value=10.0, step=0.1)
+    odi = st.number_input("ODI Score (0–50)", min_value=0.0, max_value=100.0, value=10.0, step=0.1)
 
     st.markdown("**VAS (Visual Analogue Scale)**")
     vas = st.slider("Low back pain intensity (0 = none, 10 = worst imaginable)", 0.0, 10.0, 2.0, 0.1)
@@ -69,29 +69,29 @@ col3, col4 = st.columns(2)
 
 with col3:
     ps_velocity = st.number_input(
-        "Postural Stability Velocity",
+        "Postural Stability Velocity (cm/s)",
         value=0.0, step=0.01,
         help="PS = Postural Stability. Sway velocity during standing."
     )
     ps_sway_area = st.number_input(
-        "Postural Stability Sway Area",
+        "Postural Stability Sway Area (cm²)",
         value=0.0, step=0.01,
         help="PS = Postural Stability. Sway area during standing."
     )
     ps_sway_path = st.number_input(
-        "Postural Stability Sway Path",
+        "Postural Stability Sway Path (cm)",
         value=0.0, step=0.01,
         help="PS = Postural Stability. Total sway path length."
     )
 
 with col4:
     w_velocity = st.number_input(
-        "Walking Velocity",
+        "Walking Velocity (m/s)",
         value=0.0, step=0.01,
         help="W = Walking. Walking velocity."
     )
     w_duration = st.number_input(
-        "Walking Duration",
+        "Walking Duration (sec)",
         value=0.0, step=0.01,
         help="W = Walking. Duration of the walking task (e.g., seconds)."
     )
@@ -124,11 +124,11 @@ if st.button("Predict"):
 
     # --- Input validation ---
     required_fields = {
-        "Postural Stability Velocity (cm/s)": ps_velocity,
-        "Postural Stability Sway Area (cm²)": ps_sway_area,
-        "Postural Stability Sway_Path (cm)": ps_sway_path,
-        "Walking Velocity (m/s)": w_velocity,
-        "Walking Duration (sec)": w_duration
+        "Postural Stability Velocity": ps_velocity,
+        "Postural Stability Sway Area": ps_sway_area,
+        "Postural Stability Sway Path": ps_sway_path,
+        "Walking Velocity": w_velocity,
+        "Walking Duration": w_duration
     }
 
     missing = [name for name, val in required_fields.items() if val == 0]
